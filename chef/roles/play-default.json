@@ -1,0 +1,31 @@
+{
+    "name": "play-default",
+    "chef_type": "role",
+    "json_class": "Chef::Role",
+    "default_attributes": {
+        "java": {
+            "install_flavor": "oracle",
+            "jdk_version": "7",
+            "oracle": {
+                "accept_oracle_download_terms": true
+            }
+        },
+        "playframework2_unok": {
+            "user": "vagrant",
+            "group": "vagrant",
+            "play_dir": "/usr/local/play",
+            "versions": ["2.2.1" ]
+        }
+    },
+    "run_list": [
+        "recipe[yum::epel]",
+        "recipe[yum::remi]",
+        "recipe[yum::repoforge]",
+        "recipe[ntp]",
+        "recipe[selinux::disabled]",
+        "recipe[java]",
+        "recipe[typesafe-stack]",
+        "recipe[play-default]",
+        "recipe[playframework2_unok]"
+    ]
+}

@@ -1,0 +1,11 @@
+site :opscode
+
+cookbook 'build-essential'
+cookbook 'database'
+cookbook 'php'
+cookbook 'selinux'
+cookbook 'timezone'
+cookbook 'yum'
+cookbook 'ntp'
+cookbook 'java'
+cookbook 'typesafe-stack'
