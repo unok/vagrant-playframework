@@ -1,0 +1,31 @@
+#!/bin/sh
+BUFIFS=$IFS
+IFS=
+
+CURDIR=`dirname $0`
+ACTIVATOR_DIR_HOME=${ACTIVATOR_DIR_HOME-$CURDIR}
+ACTIVATOR_VERSION_FILE=.activator_version
+ACTIVATOR_VERSION=<%= @current_version %>
+
+if [ -r $ACTIVATOR_VERSION_FILE ]; then
+    read FL <$ACTIVATOR_VERSION_FILE
+    ACTIVATOR_VERSION=$FL
+fi
+
+PATH_ORG=$PATH
+ACTIVATOR_DIR=${ACTIVATOR_DIR_HOME}/activator-${ACTIVATOR_VERSION}
+PLAY_DIR=${PLAY_DIR_HOME}/activator-${ACTIVATOR_VERSION}
+if [ -e $ACTIVATOR_DIR ]; then
+    export PATH=$ACTIVATOR_DIR:$PATH
+    ${ACTIVATOR_DIR}/activator $*
+elif [ -e $PLAY_DIR ]; then
+    export PATH=$PLAY_DIR:$PATH
+    ${PLAY_DIR}/activator $*
+else
+    echo "$ACTIVATOR_DIR not found"
+    exit 1
+fi
+
+export PATH=$PATH_ORG
+
+IFS=$BUFIFS

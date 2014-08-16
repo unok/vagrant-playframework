@@ -2,19 +2,17 @@
     "name": "play-default",
     "chef_type": "role",
     "json_class": "Chef::Role",
-    "default_attributes": {
+    "override_attributes": {
         "java": {
-            "install_flavor": "oracle",
-            "jdk_version": "7",
-            "oracle": {
-                "accept_oracle_download_terms": true
-            }
+            "install_flavor": "openjdk",
+            "jdk_version": "7"
         },
         "playframework2_unok": {
             "user": "vagrant",
             "group": "vagrant",
             "play_dir": "/usr/local/play",
-            "versions": ["2.2.1" ]
+            "versions": ["2.2.1" ],
+            "activator_versions": ["1.2.3", "1.2.8"]
         }
     },
     "run_list": [
